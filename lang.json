@@ -46,5 +46,53 @@
             "empty_user": "Empty username is not allowed",
             "task_not_found": "TBD"
         }
+    },
+    "spanish": {
+        "frame": {
+            "title": "tinyCTF",
+            "toggle": "Toggle navigation",
+            "login": "Iniciar Sesión",
+            "register": "Registro",
+            "logged_in": "Logged in as",
+            "logout": "cerrar sesión"
+        },
+        "main": {
+            "title": "Hola Mundo!",
+            "text": "Texto de bienvenida va aquí"
+        },
+        "about": {
+            "title": "Acerca de",
+            "news": "Noticias",
+            "news_text": "Noticias van aquí",
+            "rules": "Reglas",
+            "rules_text": "Reglas van aquí"
+        },
+        "tasks": {
+            "title": "Tareas"
+        },
+        "task": {
+            "description": "Descripción",
+            "attachment": "Adjunto",
+            "submit": "Submit",
+            "success": "Bandera correcta!",
+            "failure": "Bandera incorrecta :(",
+            "solution_format": "resulto por %d",
+            "no_description": "(none)",
+            "placeholder": "flag{insert_flag_here}"
+        },
+        "scoreboard": {
+            "title": "Scoreboard",
+            "player": "Jugador",
+            "score": "Puntos"
+        },
+        "error": {
+            "title": "Error",
+            "unknown": "Unknown error",
+            "login_required": "Necesitas iniciar sesión para ver esta página",
+            "invalid_credentials": "Usuario o password incorrecto",
+            "already_registered": "Este usuario ya se encuentra registrado",
+            "empty_user": "Nombre de usuario vacío no está permitido",
+            "task_not_found": "TBD"
+        }
     }
 }
