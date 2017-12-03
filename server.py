@@ -275,7 +275,8 @@ def index():
         page='main.html', login=login, user=user)
     return make_response(render)
 
-def init():
+
+if __name__ == '__main__':
     """Initializes the database and sets up the language"""
 
     config_file = 'config.json'
@@ -310,7 +311,3 @@ def init():
     # Start web server
     app.run(host=config['host'], port=config['port'],
         debug=config['debug'], threaded=True)
-
-
-if __name__ == '__main__':
-    init()
