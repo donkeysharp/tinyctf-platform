@@ -284,7 +284,7 @@ if __name__ == '__main__':
         config_file = os.environ['TINYCTF_CONFIG']
 
     # Load config
-    config_str = open('config.json', 'rb').read()
+    config_str = open(config_file, 'rb').read()
     config = json.loads(config_str)
 
     app.secret_key = config['secret_key']
