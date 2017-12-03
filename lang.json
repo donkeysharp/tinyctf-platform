@@ -51,27 +51,27 @@
         "frame": {
             "title": "tinyCTF",
             "toggle": "Toggle navigation",
-            "login": "Iniciar Sesión",
+            "login": "Iniciar Sesi&oacute;n",
             "register": "Registro",
             "logged_in": "Logged in as",
-            "logout": "cerrar sesión"
+            "logout": "cerrar sesi&oacute;n"
         },
         "main": {
             "title": "Hola Mundo!",
-            "text": "Texto de bienvenida va aquí"
+            "text": "Texto de bienvenida va aqu&iacute;"
         },
         "about": {
             "title": "Acerca de",
             "news": "Noticias",
-            "news_text": "Noticias van aquí",
+            "news_text": "Noticias van aqu&iacute;",
             "rules": "Reglas",
-            "rules_text": "Reglas van aquí"
+            "rules_text": "Reglas van aqu&iacute;"
         },
         "tasks": {
             "title": "Tareas"
         },
         "task": {
-            "description": "Descripción",
+            "description": "Descripci&oacute;n",
             "attachment": "Adjunto",
             "submit": "Submit",
             "success": "Bandera correcta!",
@@ -88,10 +88,10 @@
         "error": {
             "title": "Error",
             "unknown": "Unknown error",
-            "login_required": "Necesitas iniciar sesión para ver esta página",
+            "login_required": "Necesitas iniciar sesi&oacute;n para ver esta p&aacute;gina",
             "invalid_credentials": "Usuario o password incorrecto",
             "already_registered": "Este usuario ya se encuentra registrado",
-            "empty_user": "Nombre de usuario vacío no está permitido",
+            "empty_user": "Nombre de usuario vac&iacute;o no est&aacute; permitido",
             "task_not_found": "TBD"
         }
     }
