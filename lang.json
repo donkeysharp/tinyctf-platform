@@ -53,7 +53,7 @@
             "toggle": "Toggle navigation",
             "login": "Iniciar Sesión",
             "register": "Registro",
-            "logged_in": "Logged in as",
+            "logged_in": "Accedio como usuario ",
             "logout": "cerrar sesión"
         },
         "main": {
