@@ -38,7 +38,7 @@ def login_required(f):
 def get_user():
     """Looks up the current user in the database"""
 
-    login = 'user_id' in session    
+    login = 'user_id' in session
     if login:
         return (True, db['users'].find_one(id=session['user_id']))
 
@@ -47,8 +47,8 @@ def get_user():
 def get_task(category, score):
     """Finds a task with a given category and score"""
 
-    task = db.query('''select t.* from tasks t, categories c, cat_task ct 
-        where t.id = ct.task_id and c.id = ct.cat_id 
+    task = db.query('''select t.* from tasks t, categories c, cat_task ct
+        where t.id = ct.task_id and c.id = ct.cat_id
         and t.score=:score and lower(c.short_name)=:cat''',
         score=score, cat=category)
     return list(task)[0]
@@ -56,12 +56,12 @@ def get_task(category, score):
 def get_flags():
     """Returns the flags of the current user"""
 
-    flags = db.query('''select f.task_id from flags f 
+    flags = db.query('''select f.task_id from flags f
         where f.user_id = :user_id''',
         user_id=session['user_id'])
     return [f['task_id'] for f in list(flags)]
 
-@app.route('/error/<msg>')    
+@app.route('/error/<msg>')
 def error(msg):
     """Displays an error message"""
 
@@ -72,7 +72,7 @@ def error(msg):
 
     login, user = get_user()
 
-    render = render_template('frame.html', lang=lang, page='error.html', 
+    render = render_template('frame.html', lang=lang, page='error.html',
         message=message, login=login, user=user)
     return make_response(render)
 
@@ -105,9 +105,9 @@ def register():
     """Displays the register form"""
 
     # Render template
-    render = render_template('frame.html', lang=lang, 
+    render = render_template('frame.html', lang=lang,
         page='register.html', login=False)
-    return make_response(render) 
+    return make_response(render)
 
 @app.route('/register/submit', methods = ['POST'])
 def register_submit():
@@ -124,8 +124,8 @@ def register_submit():
     user_found = db['users'].find_one(username=username)
     if user_found:
         return redirect('/error/already_registered')
-            
-    new_user = dict(hidden=0, username=username, 
+
+    new_user = dict(hidden=0, username=username,
         password=generate_password_hash(password))
     db['users'].insert(new_user)
 
@@ -144,8 +144,8 @@ def tasks():
 
     categories = db['categories']
 
-    tasks = db.query('''select c.id as cat_id, t.id as id, c.short_name, 
-        t.score, t.row from categories c, tasks t, cat_task c_t 
+    tasks = db.query('''select c.id as cat_id, t.id as id, c.short_name,
+        t.score, t.row from categories c, tasks t, cat_task c_t
         where c.id = c_t.cat_id and t.id = c_t.task_id''')
     tasks = list(tasks)
 
@@ -170,10 +170,10 @@ def tasks():
         grid.append(row_tasks)
 
     # Render template
-    render = render_template('frame.html', lang=lang, page='tasks.html', 
-        login=login, user=user, categories=categories, grid=grid, 
+    render = render_template('frame.html', lang=lang, page='tasks.html',
+        login=login, user=user, categories=categories, grid=grid,
         flags=flags)
-    return make_response(render) 
+    return make_response(render)
 
 @app.route('/tasks/<category>/<score>')
 @login_required
@@ -193,7 +193,7 @@ def task(category, score):
     solutions = len(list(solutions))
 
     # Render template
-    render = render_template('frame.html', lang=lang, page='task.html', 
+    render = render_template('frame.html', lang=lang, page='task.html',
         task_done=task_done, login=login, solutions=solutions,
         user=user, category=category, task=task, score=score)
     return make_response(render)
@@ -217,7 +217,7 @@ def submit(category, score, flag):
         timestamp = int(time.time() * 1000)
 
         # Insert flag
-        new_flag = dict(task_id=task['id'], user_id=session['user_id'], 
+        new_flag = dict(task_id=task['id'], user_id=session['user_id'],
             score=score, timestamp=timestamp)
         db['flags'].insert(new_flag)
 
@@ -231,17 +231,17 @@ def scoreboard():
     """Displays the scoreboard"""
 
     login, user = get_user()
-    scores = db.query('''select u.username, ifnull(sum(f.score), 0) as score, 
-        max(timestamp) as last_submit from users u left join flags f 
-        on u.id = f.user_id where u.hidden = 0 group by u.username 
+    scores = db.query('''select u.username, ifnull(sum(f.score), 0) as score,
+        max(timestamp) as last_submit from users u left join flags f
+        on u.id = f.user_id where u.hidden = 0 group by u.username
         order by score desc, last_submit asc''')
 
     scores = list(scores)
 
     # Render template
-    render = render_template('frame.html', lang=lang, page='scoreboard.html', 
+    render = render_template('frame.html', lang=lang, page='scoreboard.html',
         login=login, user=user, scores=scores)
-    return make_response(render) 
+    return make_response(render)
 
 @app.route('/about')
 @login_required
@@ -251,9 +251,9 @@ def about():
     login, user = get_user()
 
     # Render template
-    render = render_template('frame.html', lang=lang, page='about.html', 
+    render = render_template('frame.html', lang=lang, page='about.html',
         login=login, user=user)
-    return make_response(render) 
+    return make_response(render)
 
 @app.route('/logout')
 @login_required
@@ -270,11 +270,11 @@ def index():
     login, user = get_user()
 
     # Render template
-    render = render_template('frame.html', lang=lang, 
+    render = render_template('frame.html', lang=lang,
         page='main.html', login=login, user=user)
     return make_response(render)
 
-if __name__ == '__main__':
+def init():
     """Initializes the database and sets up the language"""
 
     # Load config
@@ -296,13 +296,16 @@ if __name__ == '__main__':
     # Setup the flags table at first execution
     if 'flags' not in db.tables:
         db.query('''create table flags (
-            task_id INTEGER, 
-            user_id INTEGER, 
-            score INTEGER, 
-            timestamp BIGINT, 
+            task_id INTEGER,
+            user_id INTEGER,
+            score INTEGER,
+            timestamp BIGINT,
             PRIMARY KEY (task_id, user_id))''')
 
     # Start web server
-    app.run(host=config['host'], port=config['port'], 
+    app.run(host=config['host'], port=config['port'],
         debug=config['debug'], threaded=True)
 
+
+if __name__ == '__main__':
+    init()
