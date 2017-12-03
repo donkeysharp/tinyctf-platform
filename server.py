@@ -4,6 +4,7 @@
 
 import dataset
 import json
+import os
 import random
 import time
 
@@ -276,6 +277,10 @@ def index():
 
 def init():
     """Initializes the database and sets up the language"""
+
+    config_file = 'config.json'
+    if os.environ.has_key('TINYCTF_CONFIG'):
+        config_file = os.environ['TINYCTF_CONFIG']
 
     # Load config
     config_str = open('config.json', 'rb').read()
